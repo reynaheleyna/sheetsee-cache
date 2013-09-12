@@ -11,7 +11,7 @@ var router = require('router')
 // globals
 var sheetData = []
 var lastFetch 
-var KEY = '0Ao5u1U6KYND7dGN5QngweVJUWE16bTRob0d2a3dCbnc'
+var KEY = '0Ao1piFXhviejdFplMi14a0k3R2x4bFNsNEMyRFlxclE'
 
 
 // 0Ao5u1U6KYND7dGN5QngweVJUWE16bTRob0d2a3dCbnc has lat/long
@@ -87,6 +87,6 @@ function serveStatic (req, res) {
 }
 
 var server = http.createServer(reqHandler)
-var port = process.env.PORT || 3300
+var port = process.env.PORT || 81
 server.listen(port)
 console.log('Listening on port 3300')

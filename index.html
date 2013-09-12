@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Yo, yo, yo!</title>
+		<title>Historical Disaster Data</title>
 		<script type="text/javascript" src="js/ICanHaz.js"></script> 
 		<script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.js'></script>
 		<script src='js/jquery.js '></script>
@@ -15,35 +15,33 @@
 	</head>
 <body>
 	<div id="wrapper">
-		<h1>Sheetsee.js</h1>
+		<h1>Historical Disaster Viewer</h1>
+		<!--
 		<small><a href="https://docs.google.com/spreadsheet/ccc?key=0Ao5u1U6KYND7dGN5QngweVJUWE16bTRob0d2a3dCbnc#gid=0" target="_blank">data source</a></small>
+		-->
 		<div id="map" class="container"></div>
 		<!-- <span id="sortChart" class="button"> Sort values</span> -->
-		<h3>Pennies from the US</h3>
-		<div id="holder" class="container"></div>
+		<h3>Disasters in the Philippines</h3>
 		<div class="container">
 			<input id="tableFilter" type="text" placeholder="filter by.."></input>
 			<span class="clear button">Clear</span>
 			<span class="noMatches">no matches</span>
 		</div>
+		
 		<div id="siteTable" class="container"></div>
+		<!--
 		<h3>Pennies from California</h3>
 		<div id="bar2" class="container"></div>
+		-->
 		<!-- <label><input type="checkbox"> Sort values</label>   -->
 
-		<div class="container">
-			<input id="caliFilter" type="text" placeholder="filter by.."></input>
-			<span class="clear button">Clear</span>
-			<span class="noMatches">no matches</span>
-			<div id="caliCoins" dataset="calCoins"></div>
-		</div>
 	</div><!-- end wrapper -->
 
 	<script id="siteTable" type="text/html">
 		<table>
-		<tr><th class="tHeader">City</th><th class="tHeader">Place Name</th><th class="tHeader">Year</th><th class="tHeader">Image</th></tr>
+		<tr><th class="tHeader">Region</th><th class="tHeader">Province</th><th class="tHeader">Date</th><th class="tHeader">Year</th><th class="tHeader">Type</th><th class="tHeader">Dead</th><th class="tHeader">Inj</th><th class="tHeader">Mis</th></tr>
 		  {{#rows}}
-		  	<tr class="{{id}}"><td>{{city}}</td><td>{{placename}}</td><td>{{year}}</td><td>{{image}}</td></tr>
+		  	<tr class="{{id}}"><td>{{region}}</td><td>{{prov}}</td><td>{{date}}</td><td>{{year}}</td><td>{{type}}</td><td>{{dead}}</td><td>{{inj}}</td><td>{{mis}}</td></tr>
 		  {{/rows}}
 	  </table>
 	</script>
@@ -73,7 +71,7 @@
 	</script>
 
 	<script type='text/javascript'>	
-    var optionsJSON = ["city", "placename", "image"]
+    var optionsJSON = ["city", "dead", "inj", "type"]
     var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
 		var map = Sheetsee.loadMap("map")
 		Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
@@ -83,8 +81,7 @@
 		function addPopups(map, markerLayer) {
 		  markerLayer.on('click', function(e) {
 		    var feature = e.layer.feature
-		    var popupContent = '<h2>' + feature.opts.city + '</h2>' +
-		                        '<h3>' + feature.opts.placename + '</h3>'
+		    var popupContent = '<h2>' + feature.opts.city + '</h2>' + '<h3>' + 'Disaster Type :' + feature.opts.type + '<h3>' + '<h3>' +'Dead: ' + feature.opts.dead + '</h3>'
 		    e.layer.bindPopup(popupContent,{closeButton: false,})
 		  })
 		}
