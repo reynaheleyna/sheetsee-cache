@@ -87,6 +87,6 @@ function serveStatic (req, res) {
 }
 
 var server = http.createServer(reqHandler)
-var port = process.env.PORT || 81
+var port = process.env.PORT || 3300
 server.listen(port)
 console.log('Listening on port 3300')
