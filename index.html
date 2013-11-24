@@ -15,13 +15,11 @@
 	</head>
 <body>
 	<div id="wrapper">
-		<h1>Historical Disaster Viewer</h1>
+		<h1>Relief</h1>
 		<!--
 		<small><a href="https://docs.google.com/spreadsheet/ccc?key=0Ao5u1U6KYND7dGN5QngweVJUWE16bTRob0d2a3dCbnc#gid=0" target="_blank">data source</a></small>
 		-->
-		<div id="map" class="container"></div>
 		<!-- <span id="sortChart" class="button"> Sort values</span> -->
-		<h3>Disasters in the Philippines</h3>
 		<div class="container">
 			<input id="tableFilter" type="text" placeholder="filter by.."></input>
 			<span class="clear button">Clear</span>
@@ -39,9 +37,9 @@
 
 	<script id="siteTable" type="text/html">
 		<table>
-		<tr><th class="tHeader">Region</th><th class="tHeader">Province</th><th class="tHeader">Date</th><th class="tHeader">Year</th><th class="tHeader">Type</th><th class="tHeader">Dead</th><th class="tHeader">Inj</th><th class="tHeader">Mis</th></tr>
+		<tr><th class="tHeader">Name of Organization</th><th class="tHeader">Description</th><th class="tHeader">Quantity</th><th class="tHeader">Destination</th><th class="tHeader">Status</th></tr>
 		  {{#rows}}
-		  	<tr class="{{id}}"><td>{{region}}</td><td>{{prov}}</td><td>{{date}}</td><td>{{year}}</td><td>{{type}}</td><td>{{dead}}</td><td>{{inj}}</td><td>{{mis}}</td></tr>
+		  	<tr class="{{id}}"><td>{{nameoforganization}}</td><td>{{description}}</td><td>{{quantity}}</td><td>{{destination}}</td><td>{{status}}</td></tr>
 		  {{/rows}}
 	  </table>
 	</script>
@@ -68,23 +66,6 @@
   	console.log('gData', gData[0])
   	// console.log('newData', newData[0])
    }) 
-	</script>
-
-	<script type='text/javascript'>	
-    var optionsJSON = ["city", "dead", "inj", "type"]
-    var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
-		var map = Sheetsee.loadMap("map")
-		Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
-		var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 11)
-		addPopups(map, markerLayer)
-
-		function addPopups(map, markerLayer) {
-		  markerLayer.on('click', function(e) {
-		    var feature = e.layer.feature
-		    var popupContent = '<h2>' + feature.opts.city + '</h2>' + '<h3>' + 'Disaster Type :' + feature.opts.type + '<h3>' + '<h3>' +'Dead: ' + feature.opts.dead + '</h3>'
-		    e.layer.bindPopup(popupContent,{closeButton: false,})
-		  })
-		}
 	</script>
 
 	<script type="text/javascript">
